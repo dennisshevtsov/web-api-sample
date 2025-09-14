@@ -6,21 +6,35 @@ namespace WebApiSample.Web.Warehouses;
 public sealed class WarehousesController : ControllerBase
 {
   [HttpGet("{id}")]
-  public IActionResult Get(string id) => Ok();
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
+  public IActionResult Get([FromRoute] string id) => Ok(new WarehouseResource { Id = id });
 
   [HttpGet]
-  public IActionResult List() => Ok();
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListWarehousesResponse))]
+  public IActionResult List() => Ok(new ListWarehousesResponse
+  {
+    Results = [new WarehouseResource { Id = "test" }],
+  });
 
   [HttpPost]
-  public IActionResult Create(CreateWarehouseRequest request) => Ok();
+  [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(WarehouseResource))]
+  public IActionResult Create([FromBody] CreateWarehouseRequest request) => CreatedAtAction
+  (
+    actionName : nameof(Get),
+    routeValues: new { id = "test" },
+    value      : new WarehouseResource { Id = request.Id }
+  );
 
   [HttpPatch("{id}")]
-  public IActionResult Update(string id, UpdateWarehouseRequest request) => Ok();
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
+  public IActionResult Update([FromRoute] string id, [FromBody] UpdateWarehouseRequest request) => Ok(new WarehouseResource { Id = request.Id });
 
   [HttpPut("{id}")]
-  public IActionResult Replace(string id, ReplaceWarehouseRequest request) => Ok();
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
+  public IActionResult Replace([FromRoute] string id, [FromBody] ReplaceWarehouseRequest request) => Ok(new WarehouseResource { Id = request.Id });
 
   [HttpDelete("{id}")]
-  public IActionResult Delete(string id) => Ok();
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  public IActionResult Delete([FromRoute] string id) => NoContent();
 }
 
