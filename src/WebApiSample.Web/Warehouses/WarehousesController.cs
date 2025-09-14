@@ -7,31 +7,31 @@ public sealed class WarehousesController : ControllerBase
 {
   [HttpGet("{id}")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
-  public IActionResult Get([FromRoute] string id) => Ok(new WarehouseResource { Id = id });
+  public IActionResult Get([FromRoute] string id, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new WarehouseResource { Id = id });
 
   [HttpGet]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListWarehousesResponse))]
-  public IActionResult List() => Ok(new ListWarehousesResponse
+  public IActionResult List([FromQuery] IReadOnlyList<string> fieldMask) => Ok(new ListWarehousesResponse
   {
     Results = [new WarehouseResource { Id = "test" }],
   });
 
   [HttpPost]
   [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(WarehouseResource))]
-  public IActionResult Create([FromBody] CreateWarehouseRequest request) => CreatedAtAction
+  public IActionResult Create([FromBody] WarehouseResource resource) => CreatedAtAction
   (
     actionName : nameof(Get),
     routeValues: new { id = "test" },
-    value      : new WarehouseResource { Id = request.Id }
+    value      : resource
   );
 
   [HttpPatch("{id}")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
-  public IActionResult Update([FromRoute] string id, [FromBody] UpdateWarehouseRequest request) => Ok(new WarehouseResource { Id = request.Id });
+  public IActionResult Update([FromRoute] string id, [FromBody] WarehouseResource resource, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(resource);
 
   [HttpPut("{id}")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
-  public IActionResult Replace([FromRoute] string id, [FromBody] ReplaceWarehouseRequest request) => Ok(new WarehouseResource { Id = request.Id });
+  public IActionResult Replace([FromRoute] string id, [FromBody] WarehouseResource resource) => Ok(resource);
 
   [HttpDelete("{id}")]
   [ProducesResponseType(StatusCodes.Status204NoContent)]
