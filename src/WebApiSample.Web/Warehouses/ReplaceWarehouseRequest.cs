@@ -2,5 +2,6 @@
 
 public sealed class ReplaceWarehouseRequest
 {
+  public string? Name { get; set; }
 }
 

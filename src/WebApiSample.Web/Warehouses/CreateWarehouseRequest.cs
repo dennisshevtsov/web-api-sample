@@ -2,5 +2,7 @@
 
 public sealed class CreateWarehouseRequest
 {
-  public string Id { get; set; }
+  public required string Id { get; set; }
+
+  public string? Name { get; set; }
 }
