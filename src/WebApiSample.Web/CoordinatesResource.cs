@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApiSample.Web.Warehouses;
+namespace WebApiSample.Web;
 
 public sealed class CoordinatesResource
 {

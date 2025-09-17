@@ -2,7 +2,7 @@
 
 namespace WebApiSample.Web.Warehouses;
 
-[Route("v1/warehouses")]
+[Route("api/v1/warehouses")]
 public sealed class WarehousesController : ControllerBase
 {
   [HttpGet("{id}")]
@@ -10,8 +10,8 @@ public sealed class WarehousesController : ControllerBase
   public IActionResult Get([FromRoute] string id, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new WarehouseResource { Id = id });
 
   [HttpGet]
-  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListWarehousesResponse))]
-  public IActionResult List([FromQuery] IReadOnlyList<string> fieldMask) => Ok(new ListWarehousesResponse
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponse<WarehouseResource>))]
+  public IActionResult List([FromQuery] IReadOnlyList<string> fieldMask) => Ok(new ListResponse<WarehouseResource>
   {
     Results = [new WarehouseResource { Id = "test" }],
   });
