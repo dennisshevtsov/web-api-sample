@@ -5,11 +5,11 @@ namespace WebApiSample.DeliveryPoints;
 [Route("api/v1/delivery-points")]
 public sealed class DeliveryPointController : ControllerBase
 {
-  [HttpGet("{id}")]
+  [HttpGet("{id}", Name = "GetDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeliveryPointResource))]
   public IActionResult Get([FromRoute] string id, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new DeliveryPointResource { Id = id });
 
-  [HttpGet]
+  [HttpGet(Name = "ListDeliveryPoints")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponse<DeliveryPointResource>))]
   public IActionResult List(
     [FromQuery] string filter,
@@ -20,7 +20,7 @@ public sealed class DeliveryPointController : ControllerBase
     Results = [new DeliveryPointResource { Id = "test" }],
   });
 
-  [HttpPost]
+  [HttpPost(Name = "CreateDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(DeliveryPointResource))]
   public IActionResult Create([FromBody] DeliveryPointResource resource) => CreatedAtAction
   (
@@ -29,16 +29,20 @@ public sealed class DeliveryPointController : ControllerBase
     value: resource
   );
 
-  [HttpPatch("{id}")]
+  [HttpPatch("{id}", Name = "UpdateDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeliveryPointResource))]
   public IActionResult Update([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(resource);
 
-  [HttpPut("{id}")]
+  [HttpPut("{id}", Name = "ReplaceDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeliveryPointResource))]
   public IActionResult Replace([FromRoute] string id, [FromBody] DeliveryPointResource resource) => Ok(resource);
 
-  [HttpDelete("{id}")]
+  [HttpDelete("{id}", Name = "DeleteDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status204NoContent)]
   public IActionResult Delete([FromRoute] string id) => NoContent();
+
+  [HttpPost(":import", Name = "ImportDeliveryPoints")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  public IActionResult Import([FromBody] ImportRequest request) => NoContent();
 }
 
