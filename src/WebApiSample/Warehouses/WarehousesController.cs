@@ -11,7 +11,11 @@ public sealed class WarehousesController : ControllerBase
 
   [HttpGet]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponse<WarehouseResource>))]
-  public IActionResult List([FromQuery] string filter, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new ListResponse<WarehouseResource>
+  public IActionResult List(
+    [FromQuery] string filter,
+    [FromQuery] string nextPageToken,
+    [FromQuery] int maxPageSize,
+    [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new ListResponse<WarehouseResource>
   {
     Results = [new WarehouseResource { Id = "test" }],
   });

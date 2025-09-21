@@ -11,7 +11,11 @@ public sealed class DeliveryPointController : ControllerBase
 
   [HttpGet]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponse<DeliveryPointResource>))]
-  public IActionResult List([FromQuery] string filter, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new ListResponse<DeliveryPointResource>
+  public IActionResult List(
+    [FromQuery] string filter,
+    [FromQuery] string nextPageToken,
+    [FromQuery] int maxPageSize,
+    [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new ListResponse<DeliveryPointResource>
   {
     Results = [new DeliveryPointResource { Id = "test" }],
   });
