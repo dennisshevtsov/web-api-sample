@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebApiSample.Web.DeliveryPoints;
+namespace WebApiSample.DeliveryPoints;
 
 [Route("api/v1/delivery-points")]
 public sealed class DeliveryPointController : ControllerBase

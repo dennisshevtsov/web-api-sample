@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApiSample.Web.DeliveryPoints;
+namespace WebApiSample.DeliveryPoints;
 
 public sealed class WorkingDayResource
 {

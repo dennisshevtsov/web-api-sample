@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApiSample.Web.DeliveryPoints;
+namespace WebApiSample.Warehouses;
 
-public sealed class DeliveryPointResource
+public sealed class WarehouseResource
 {
   [Required]
   [MaxLength(16)]
@@ -17,7 +17,4 @@ public sealed class DeliveryPointResource
 
   [Required]
   public CoordinatesResource? Coordinates { get; set; }
-
-  [Required]
-  public WorkingDaysResource? WorkingHours { get; set; }
 }

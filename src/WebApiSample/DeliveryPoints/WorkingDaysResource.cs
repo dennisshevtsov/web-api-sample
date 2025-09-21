@@ -1,4 +1,4 @@
-﻿namespace WebApiSample.Web.DeliveryPoints;
+﻿namespace WebApiSample.DeliveryPoints;
 
 public sealed class WorkingDaysResource
 {
