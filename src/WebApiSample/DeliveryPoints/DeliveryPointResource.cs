@@ -20,7 +20,7 @@ public sealed class DeliveryPointResource
   public string? Address { get; set; }
 
   [Required]
-  public CoordinatesResource? Coordinates { get; set; }
+  public LocationResource? Location { get; set; }
 
   [Required]
   public WorkingDaysResource? WorkingHours { get; set; }
