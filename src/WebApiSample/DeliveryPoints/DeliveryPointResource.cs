@@ -8,6 +8,10 @@ public sealed class DeliveryPointResource
   [MaxLength(16)]
   public string? Id { get; set; }
 
+  [Required]
+  [MaxLength(16)]
+  public string? WarehouseId { get; set; }
+
   [MaxLength(32)]
   public string? Name { get; set; }
 
