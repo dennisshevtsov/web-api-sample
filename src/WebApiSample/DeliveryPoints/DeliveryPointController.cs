@@ -40,5 +40,9 @@ public sealed class DeliveryPointController : ControllerBase
   [HttpDelete("{id}")]
   [ProducesResponseType(StatusCodes.Status204NoContent)]
   public IActionResult Delete([FromRoute] string id) => NoContent();
+
+  [HttpPost(":import")]
+  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  public IActionResult Import([FromBody] ImportRequest request) => NoContent();
 }
 
