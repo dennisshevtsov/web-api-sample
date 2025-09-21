@@ -1,4 +1,4 @@
-﻿namespace WebApiSample.Web;
+﻿namespace WebApiSample;
 
 public sealed class ListResponse<TResource> where TResource : class
 {

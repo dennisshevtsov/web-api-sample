@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebApiSample.Web.Warehouses;
+namespace WebApiSample.Warehouses;
 
 [Route("api/v1/warehouses")]
 public sealed class WarehousesController : ControllerBase
