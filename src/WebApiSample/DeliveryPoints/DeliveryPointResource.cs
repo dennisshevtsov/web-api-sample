@@ -8,6 +8,10 @@ public sealed class DeliveryPointResource
   [MaxLength(16)]
   public string? Id { get; set; }
 
+  [Required]
+  [MaxLength(16)]
+  public string? WarehouseId { get; set; }
+
   [MaxLength(32)]
   public string? Name { get; set; }
 
@@ -16,7 +20,7 @@ public sealed class DeliveryPointResource
   public string? Address { get; set; }
 
   [Required]
-  public CoordinatesResource? Coordinates { get; set; }
+  public LocationResource? Location { get; set; }
 
   [Required]
   public WorkingDaysResource? WorkingHours { get; set; }
