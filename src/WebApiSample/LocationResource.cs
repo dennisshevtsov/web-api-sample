@@ -2,7 +2,7 @@
 
 namespace WebApiSample;
 
-public sealed class CoordinatesResource
+public sealed class LocationResource
 {
   [Required]
   public float? Latitude { get; set; }

@@ -16,5 +16,5 @@ public sealed class WarehouseResource
   public string? Address { get; set; }
 
   [Required]
-  public CoordinatesResource? Coordinates { get; set; }
+  public LocationResource? Coordinates { get; set; }
 }
