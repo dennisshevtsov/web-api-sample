@@ -2,11 +2,8 @@
 
 namespace WebApiSample;
 
-public sealed class S3DataSource : DataSource
+public sealed class S3DataSource() : DataSource(DataSource.S3Type)
 {
-  [Required]
-  public override string? Type => "s3";
-
   [Required]
   public string? BucketId { get; set; }
 

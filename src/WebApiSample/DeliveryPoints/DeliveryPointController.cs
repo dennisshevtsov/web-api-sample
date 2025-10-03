@@ -21,28 +21,39 @@ public sealed class DeliveryPointController : ControllerBase
   });
 
   [HttpPost(Name = "CreateDeliveryPoint")]
-  [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(DeliveryPointResource))]
-  public IActionResult Create([FromBody] DeliveryPointResource resource) => CreatedAtAction
-  (
-    actionName: nameof(Get),
-    routeValues: new { id = "test" },
-    value: resource
-  );
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
+  public IActionResult Create([FromBody] DeliveryPointResource resource) => Ok(new OperationResource<DeliveryPointResource>
+  {
+    Id = "test",
+  });
 
   [HttpPatch("{id}", Name = "UpdateDeliveryPoint")]
-  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeliveryPointResource))]
-  public IActionResult Update([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(resource);
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
+  public IActionResult Update([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new OperationResource<DeliveryPointResource>
+  {
+    Id = "test",
+  });
 
   [HttpPut("{id}", Name = "ReplaceDeliveryPoint")]
-  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DeliveryPointResource))]
-  public IActionResult Replace([FromRoute] string id, [FromBody] DeliveryPointResource resource) => Ok(resource);
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
+  public IActionResult Replace([FromRoute] string id, [FromBody] DeliveryPointResource resource) => Ok(new OperationResource<DeliveryPointResource>
+  {
+    Id = "test",
+  });
 
   [HttpDelete("{id}", Name = "DeleteDeliveryPoint")]
-  [ProducesResponseType(StatusCodes.Status204NoContent)]
-  public IActionResult Delete([FromRoute] string id) => NoContent();
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource))]
+  public IActionResult Delete([FromRoute] string id) => Ok(new OperationResource
+  {
+    Id = "test",
+  });
 
   [HttpPost(":import", Name = "ImportDeliveryPoints")]
-  [ProducesResponseType(StatusCodes.Status204NoContent)]
-  public IActionResult Import([FromBody] ImportRequest request) => NoContent();
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource))]
+  public IActionResult Import([FromBody] ImportRequest request) => Ok(new OperationResource
+  {
+    Id = "test",
+    Done = false,
+  });
 }
 
