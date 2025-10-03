@@ -2,8 +2,11 @@
 
 namespace WebApiSample;
 
-public abstract class DataSource
+public abstract class DataSource(string type)
 {
+  public const string S3Type = "s3";
+  public const string SambaType = "samba";
+
   [Required]
-  public virtual string? Type { get; }
+  public string Type { get; } = type;
 }
