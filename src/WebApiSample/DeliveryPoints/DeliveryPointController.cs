@@ -42,8 +42,15 @@ public sealed class DeliveryPointController : ControllerBase
   });
 
   [HttpDelete("{id}", Name = "DeleteDeliveryPoint")]
-  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource))]
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
   public IActionResult Delete([FromRoute] string id) => Ok(new OperationResource
+  {
+    Id = "test",
+  });
+
+  [HttpPost("{id}:undelete", Name = "UndeleteDeliveryPoint")]
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
+  public IActionResult Undelete([FromRoute] string id) => Ok(new OperationResource
   {
     Id = "test",
   });
