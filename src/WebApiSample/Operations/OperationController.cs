@@ -7,7 +7,8 @@ public sealed class OperationController : ControllerBase
 {
   [HttpGet("{id}", Name = "GetOperation")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OperationResource<,>))]
-  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OperationResource<OperationErrorResult>))]
+  [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OperationResource<ErrorResource>))]
+  [ProducesResponseType(typeof(ErrorResource), StatusCodes.Status400BadRequest)]
   public IActionResult Get([FromRoute] string id) => Ok(new OperationResource
   {
     Id = id,
