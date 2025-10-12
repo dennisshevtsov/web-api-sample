@@ -22,4 +22,10 @@ public sealed class WarehouseResource
   [Required]
   [JsonPropertyName("location")]
   public LocationResource? Location { get; set; }
+
+  /// <summary>
+  /// This field cannot be set or updated directly through CreateWarehouse (POST warehouse) and UpdaetWarehouse (PUT warehouse/{id}) methods. Use the DeleteWarehouse (DELETE warehouse/{id}) or UndeleteWarehouse (POST warehouse/{id}:undelete) methods.
+  /// </summary>
+  [JsonPropertyName("deleted")]
+  public bool? Deleted { get; set; }
 }

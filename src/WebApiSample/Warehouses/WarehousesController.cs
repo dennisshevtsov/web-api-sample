@@ -38,7 +38,15 @@ public sealed class WarehousesController : ControllerBase
   public IActionResult Replace([FromRoute] string id, [FromBody] WarehouseResource resource) => Ok(resource);
 
   [HttpDelete("{id}", Name = "DeleteWarehouse")]
-  [ProducesResponseType(StatusCodes.Status204NoContent)]
+  [ProducesResponseType(typeof(WarehouseResource), StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(StatusCodes.Status412PreconditionFailed)]
   public IActionResult Delete([FromRoute] string id) => NoContent();
+
+  [HttpDelete("{id}:undelete", Name = "UndeleteWarehouse")]
+  [ProducesResponseType(typeof(WarehouseResource), StatusCodes.Status200OK)]
+  [ProducesResponseType(StatusCodes.Status400BadRequest)]
+  [ProducesResponseType(StatusCodes.Status412PreconditionFailed)]
+  public IActionResult Undelete([FromRoute] string id) => NoContent();
 }
 
