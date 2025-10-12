@@ -102,6 +102,22 @@ public sealed class DeliveryPointController : ControllerBase
     }
   );
 
+  [HttpPost("{id}:expunge", Name = "ExpungeDeliveryPoint")]
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  public IActionResult Expunge([FromRoute] string id) => CreatedAtRoute
+  (
+    routeName: "GetOperation",
+    routeValues: new
+    {
+      id = "test",
+    },
+    value: new OperationResource<DeliveryPointResource>
+    {
+      Id = "test",
+    }
+  );
+
   [HttpPost(":import", Name = "ImportDeliveryPoints")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]

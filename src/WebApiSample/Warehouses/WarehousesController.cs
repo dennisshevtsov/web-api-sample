@@ -73,5 +73,26 @@ public sealed class WarehousesController : ControllerBase
       Id = "test",
     }
   );
+
+  /// <summary>
+  /// Hard delete a warehouse and all delivery points that are related to this warehouse.
+  /// </summary>
+  /// <param name="id">The ID of a warehouse to delete.</param>
+  /// <param name="force">The flag that indicates whether it should hard delete a warehouse and its delivery points.</param>
+  [HttpPost("{id}:expunge", Name = "ExpungeWarehouse")]
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<WarehouseResource, ExpungeWarehouseMetadata>))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  public IActionResult Expunge([FromRoute] string id, bool force) => CreatedAtRoute
+  (
+    routeName: "GetOperation",
+    routeValues: new
+    {
+      id = "test",
+    },
+    value: new OperationResource<WarehouseResource, ExpungeWarehouseMetadata>
+    {
+      Id = "test",
+    }
+  );
 }
 
