@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace WebApiSample.DeliveryPoints;
 
+[ApiController]
 [Route("api/v1/delivery-points")]
+[Consumes(MediaTypeNames.Application.Json)]
+[Produces(MediaTypeNames.Application.Json)]
 public sealed class DeliveryPointController : ControllerBase
 {
   [HttpGet("{id}", Name = "GetDeliveryPoint")]
