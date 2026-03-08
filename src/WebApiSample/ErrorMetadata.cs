@@ -2,7 +2,7 @@
 
 namespace WebApiSample;
 
-public sealed class ErrorResource
+public sealed class ErrorMetadata
 {
   [JsonPropertyName("code")]
   public required string Code { get; init; }

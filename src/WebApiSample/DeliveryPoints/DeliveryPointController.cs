@@ -7,12 +7,12 @@ public sealed class DeliveryPointController : ControllerBase
 {
   [HttpGet("{id}", Name = "GetDeliveryPoint")]
   [ProducesResponseType(typeof(DeliveryPointResource), StatusCodes.Status200OK)]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Get([FromRoute] string id, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new DeliveryPointResource { Id = id });
 
   [HttpGet(Name = "ListDeliveryPoints")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponse<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult List([FromQuery] string filter, [FromQuery] string nextPageToken, [FromQuery] int maxPageSize, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new ListResponse<DeliveryPointResource>
   {
     Results = [new DeliveryPointResource { Id = "test" }],
@@ -25,7 +25,7 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost(Name = "CreateDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Create([FromBody] DeliveryPointResource resource, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -42,7 +42,7 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPatch("{id}", Name = "UpdateDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Update([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] IReadOnlyList<string> fieldMask, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -58,7 +58,7 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPut("{id}", Name = "ReplaceDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Replace([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -73,7 +73,7 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpDelete("{id}", Name = "DeleteDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Delete([FromRoute] string id, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -88,7 +88,7 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost("{id}:undelete", Name = "UndeleteDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Undelete([FromRoute] string id, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -102,7 +102,7 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost("{id}:batchDelete", Name = "BatchDeleteDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult BatchDelete([FromBody] BatchDeleteDeliveryPointRequest request, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -116,7 +116,7 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost("{id}:batchUndelete", Name = "BatchUndeleteDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult BatchUndelete([FromBody] BatchUndeleteDeliveryPointRequest request, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -131,7 +131,7 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost("{id}:expunge", Name = "ExpungeDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Expunge([FromRoute] string id, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -145,8 +145,8 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="request">Parameters of a file to import delivery points.</param>
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost(":import", Name = "ImportDeliveryPoints")]
-  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<NoResource>))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Import([FromBody] ImportRequest request, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",

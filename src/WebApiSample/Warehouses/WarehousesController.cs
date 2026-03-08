@@ -7,12 +7,12 @@ public sealed class WarehousesController : ControllerBase
 {
   [HttpGet("{id}", Name = "GetWarehouse")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Get([FromRoute] string id, [FromQuery] IReadOnlyList<string> fieldMask) => Ok(new WarehouseResource { Id = id });
 
   [HttpGet(Name = "ListWarehouses")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponse<WarehouseResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult List(
     [FromQuery] string filter,
     [FromQuery] string nextPageToken,
@@ -29,7 +29,7 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost(Name = "CreateWarehouse")]
   [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(WarehouseResource))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Create([FromBody] WarehouseResource resource, [FromQuery] string? resourceId) => CreatedAtAction
   (
     actionName : nameof(Get),
@@ -46,7 +46,7 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPatch("{id}", Name = "UpdateWarehouse")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Update([FromRoute] string id, [FromBody] WarehouseResource resource, [FromQuery] IReadOnlyList<string> fieldMask, [FromQuery] string? resourceId) => Ok(resource);
 
   /// <summary>
@@ -57,7 +57,7 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPut("{id}", Name = "ReplaceWarehouse")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Replace([FromRoute] string id, [FromBody] WarehouseResource resource, [FromQuery] string? resourceId) => Ok(resource);
 
   /// <summary>
@@ -67,7 +67,7 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpDelete("{id}", Name = "DeleteWarehouse")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<WarehouseResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Delete([FromRoute] string id, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -82,7 +82,7 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost("{id}:undelete", Name = "UndeleteWarehouse")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<WarehouseResource>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Undelete([FromRoute] string id, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
@@ -98,7 +98,7 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
   [HttpPost("{id}:expunge", Name = "ExpungeWarehouse")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<WarehouseResource, ExpungeWarehouseMetadata>))]
-  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorResource))]
+  [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
   public IActionResult Expunge([FromRoute] string id, [FromQuery] bool force, [FromQuery] string? resourceId) => CreatedAtRoute
   (
     routeName: "GetOperation",
