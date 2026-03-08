@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Net.Mime;
 
 namespace WebApiSample.Warehouses;
 
+[ApiController]
 [Route("api/v1/warehouses")]
+[Consumes(MediaTypeNames.Application.Json)]
+[Produces(MediaTypeNames.Application.Json)]
 public sealed class WarehousesController : ControllerBase
 {
   [HttpGet("{id}", Name = "GetWarehouse")]
