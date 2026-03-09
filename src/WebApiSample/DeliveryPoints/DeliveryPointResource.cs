@@ -8,7 +8,7 @@ public sealed class DeliveryPointResource
   [Required]
   [MaxLength(16)]
   [JsonPropertyName("id")]
-  public string? Id { get; set; }
+  public string? Id { get; set; } // this fields and all below come from outside, and we are not responsible for initializing them, so they are all nullable despite to the fact that some of them are required
 
   [Required]
   [MaxLength(16)]

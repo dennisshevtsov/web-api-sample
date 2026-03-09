@@ -14,7 +14,6 @@ public sealed class DeliveryPointController : ControllerBase
   /// </summary>
   /// <param name="id">The ID of the delivery point.</param>
   /// <param name="fieldMask">The list of fields that should be included to the response. Example: name,locations.*</param>
-  /// <returns></returns>
   [HttpGet("{id}", Name = "GetDeliveryPoint")]
   [ProducesResponseType(typeof(DeliveryPointResource), StatusCodes.Status200OK)]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
@@ -27,7 +26,6 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="nextPageToken">The next page token.</param>
   /// <param name="maxPageSize">The max size of the page. If page contains less than this value, it does not mean the there is no more records. Only nextPageToken indicates if there are records still.</param>
   /// <param name="fieldMask">The list of fields that should be included to the response. Example: name,locations.*</param>
-  /// <returns></returns>
   [HttpGet(Name = "ListDeliveryPoints")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponse<DeliveryPointResource>))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
@@ -41,10 +39,11 @@ public sealed class DeliveryPointController : ControllerBase
   /// </summary>
   /// <param name="resource">A delivery point to create.</param>
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
+  /// <param name="validateOnly">If this field is true, no chages will be applied, the method will only validate the request.</param>
   [HttpPost(Name = "CreateDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
-  public IActionResult Create([FromBody] DeliveryPointResource resource, [FromQuery] string? resourceId) => CreatedAtRoute
+  public IActionResult Create([FromBody] DeliveryPointResource resource, [FromQuery] string? resourceId, [FromQuery] bool validateOnly) => CreatedAtRoute
   (
     routeName: "GetOperation",
     routeValues: new { id = "test" },
@@ -58,10 +57,11 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="resource">A delivery point to update.</param>
   /// <param name="fieldMask">A list of fields to update.</param>
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
+  /// <param name="validateOnly">If this field is true, no chages will be applied, the method will only validate the request.</param>
   [HttpPatch("{id}", Name = "UpdateDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
-  public IActionResult Update([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] IReadOnlyList<string> fieldMask, [FromQuery] string? resourceId) => CreatedAtRoute
+  public IActionResult Update([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] IReadOnlyList<string> fieldMask, [FromQuery] string? resourceId, [FromQuery] bool validateOnly) => CreatedAtRoute
   (
     routeName: "GetOperation",
     routeValues: new { id = "test" },
@@ -74,10 +74,11 @@ public sealed class DeliveryPointController : ControllerBase
   /// <param name="id">The ID of a delivery point.</param>
   /// <param name="resource">A delivery point to replace.</param>
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
+  /// <param name="validateOnly">If this field is true, no chages will be applied, the method will only validate the request.</param>
   [HttpPut("{id}", Name = "ReplaceDeliveryPoint")]
   [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(OperationResource<DeliveryPointResource>))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
-  public IActionResult Replace([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] string? resourceId) => CreatedAtRoute
+  public IActionResult Replace([FromRoute] string id, [FromBody] DeliveryPointResource resource, [FromQuery] string? resourceId, [FromQuery] bool validateOnly) => CreatedAtRoute
   (
     routeName: "GetOperation",
     routeValues: new { id = "test" },

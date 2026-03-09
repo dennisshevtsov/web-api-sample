@@ -14,7 +14,6 @@ public sealed class WarehousesController : ControllerBase
   /// </summary>
   /// <param name="id">The ID of the warehouse.</param>
   /// <param name="fieldMask">The list of fields that should be included to the response. Example: name,locations.*</param>
-  /// <returns></returns>
   [HttpGet("{id}", Name = "GetWarehouse")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
@@ -27,7 +26,6 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="nextPageToken">The next page token.</param>
   /// <param name="maxPageSize">The max size of the page. If page contains less than this value, it does not mean the there is no more records. Only nextPageToken indicates if there are records still.</param>
   /// <param name="fieldMask">The list of fields that should be included to the response. Example: name,locations.*</param>
-  /// <returns></returns>
   [HttpGet(Name = "ListWarehouses")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ListResponse<WarehouseResource>))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
@@ -45,10 +43,11 @@ public sealed class WarehousesController : ControllerBase
   /// </summary>
   /// <param name="resource">The warehouse.</param>
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
+  /// <param name="validateOnly">If this field is true, no chages will be applied, the method will only validate the request.</param>
   [HttpPost(Name = "CreateWarehouse")]
   [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(WarehouseResource))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
-  public IActionResult Create([FromBody] WarehouseResource resource, [FromQuery] string? resourceId) => CreatedAtAction
+  public IActionResult Create([FromBody] WarehouseResource resource, [FromQuery] string? resourceId, [FromQuery] bool validateOnly) => CreatedAtAction
   (
     actionName : nameof(Get),
     routeValues: new { id = "test" },
@@ -62,10 +61,11 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="resource">The warehouse.</param>
   /// <param name="fieldMask">A list of fields to update.</param>
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
+  /// <param name="validateOnly">If this field is true, no chages will be applied, the method will only validate the request.</param>
   [HttpPatch("{id}", Name = "UpdateWarehouse")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
-  public IActionResult Update([FromRoute] string id, [FromBody] WarehouseResource resource, [FromQuery] IReadOnlyList<string> fieldMask, [FromQuery] string? resourceId) => Ok(resource);
+  public IActionResult Update([FromRoute] string id, [FromBody] WarehouseResource resource, [FromQuery] IReadOnlyList<string> fieldMask, [FromQuery] string? resourceId, [FromQuery] bool validateOnly) => Ok(resource);
 
   /// <summary>
   /// Replace a warehouse by its ID. If there is no warehouse with this ID, a new warehouse will be created.
@@ -73,10 +73,11 @@ public sealed class WarehousesController : ControllerBase
   /// <param name="id">The ID of a warehouse to undelete.</param>
   /// <param name="resource">The warehouse.</param>
   /// <param name="resourceId">The optional ID of a request to deduplicate requests. Use a random generated value.</param>
+  /// <param name="validateOnly">If this field is true, no chages will be applied, the method will only validate the request.</param>
   [HttpPut("{id}", Name = "ReplaceWarehouse")]
   [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WarehouseResource))]
   [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorMetadata))]
-  public IActionResult Replace([FromRoute] string id, [FromBody] WarehouseResource resource, [FromQuery] string? resourceId) => Ok(resource);
+  public IActionResult Replace([FromRoute] string id, [FromBody] WarehouseResource resource, [FromQuery] string? resourceId, [FromQuery] bool validateOnly) => Ok(resource);
 
   /// <summary>
   /// Soft delete a warehouse.

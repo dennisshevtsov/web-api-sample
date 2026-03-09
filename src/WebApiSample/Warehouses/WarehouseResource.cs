@@ -8,7 +8,7 @@ public sealed class WarehouseResource
   [Required]
   [MaxLength(16)]
   [JsonPropertyName("id")]
-  public string? Id { get; set; }
+  public string? Id { get; set; } // this fields comes from outside, and we are not resposible for initializing it, so it is nullable despite to the fact that it is required
 
   [MaxLength(32)]
   [JsonPropertyName("name")]
